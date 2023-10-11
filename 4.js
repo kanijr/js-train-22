@@ -5,6 +5,13 @@
 // Цей клас містить базову вартість напою (price=10) та його ім'я (name="Чай").
 class Drink {
   // Метод prepare() виводить в консоль рядок "Приготування {назва напою}"
+  name = "Чай";
+
+  price = 10;
+
+  prepare() {
+    console.log(`Приготування ${this.name}`);
+  }
 }
 
 // Клас HoneyDecorator є декоратором, який додає мед до напою.
@@ -15,18 +22,34 @@ class HoneyDecorator {
   // і додаткову вартість меду, яку за замовчуванням встановлюємо на 0.5, і множимо на this.amount.
   // Метод prepare відповідає за приготування напою з медом.
   // Він виводить в консоль Приготування ${this.name} з медом
+  constructor(drink, amount) {
+    this.drink = drink;
+    this.amount = amount;
+  }
+
+  get name() {
+    return `${this.drink.name} з ${this.amount} г меду`;
+  }
+
+  get price() {
+    return this.drink.price + this.amount * 0, 5;
+  }
+
+  prepare() {
+    console.log(`Приготування ${this.drink.name} з медом`);
+  }
 }
 console.log("Завдання 4 ====================================");
 // Після виконання розкоментуйте код нижче
 
 // Створення об'єкту базового напою (чаю)
-// let tea = new Drink();
-// console.log(tea.name); // Виводить ім'я напою
-// console.log(tea.price); // Виводить вартість напою
-// tea.prepare(); // Готує напій
+let tea = new Drink();
+console.log(tea.name); // Виводить ім'я напою
+console.log(tea.price); // Виводить вартість напою
+tea.prepare(); // Готує напій
 
 // Додавання декоратора меду до чаю
-// let honeyTea = new HoneyDecorator(tea, 2); // Додаємо 2 грами меду
-// console.log(honeyTea.name); // Виводить нову назву напою
-// console.log(honeyTea.price); // Виводить нову вартість напою
-// honeyTea.prepare(); // Готує напій з медом
+let honeyTea = new HoneyDecorator(tea, 2); // Додаємо 2 грами меду
+console.log(honeyTea.name); // Виводить нову назву напою
+console.log(honeyTea.price); // Виводить нову вартість напою
+honeyTea.prepare(); // Готує напій з медом
